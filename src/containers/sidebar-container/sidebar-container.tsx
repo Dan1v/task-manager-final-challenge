@@ -8,7 +8,7 @@ import React from 'react';
 import { staticImages } from '../../../public/staticImages';
 import * as styles from './styles';
 
-export default function SideBarContainer() {
+export function SideBarContainer() {
   const pathname = usePathname();
 
   return (

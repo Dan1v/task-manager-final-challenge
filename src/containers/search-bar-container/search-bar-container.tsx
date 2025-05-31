@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as styles from './styles';
 
-export default function SearchBarContainer() {
+export function SearchBarContainer() {
   return (
     <section className=" mr-9 mt-8">
       <div className={styles.inputContainer}>

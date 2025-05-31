@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { SearchBarContainer, SideBarContainer } from '@/containers';
+import { SearchBarContainer } from '@/containers/search-bar-container/search-bar-container';
+import { SideBarContainer } from '@/containers/sidebar-container/sidebar-container';
 
 import * as styles from './styles';
 

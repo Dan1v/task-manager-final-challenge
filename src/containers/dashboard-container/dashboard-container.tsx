@@ -1,11 +1,13 @@
 'use client';
 import React, { useState } from 'react';
 
+import { CardTaskComponent } from '@/components/card-task-component/card-task-component';
+
 import * as styles from './styles';
 
 type DisplayMode = 'list' | 'cards';
 
-export default function DashBoardContainer() {
+export function DashBoardContainer() {
   const [displayMode, setDisplayMode] = useState<DisplayMode>('list');
 
   const handleDisplayMode = (state: DisplayMode) => {
@@ -13,8 +15,8 @@ export default function DashBoardContainer() {
   };
 
   return (
-    <div className=" mt-8 mr-8 ">
-      <div className="flex justify-between items-center gap-10">
+    <section className=" mt-8 mr-8 mb-8  ">
+      <div className="flex justify-between items-center gap-10 min-h-12">
         <div className="flex">
           <button
             className={styles.buttonList(displayMode)}
@@ -45,7 +47,7 @@ export default function DashBoardContainer() {
             </svg>
           </button>
         </div>
-        <button className=" flex justify-center items-center w-10 h-10 bg-primary4 rounded-[8px] hover:cursor-pointer transition duration-200 hover:bg-primary3 ">
+        <button className={styles.buttonNewTask}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -57,6 +59,35 @@ export default function DashBoardContainer() {
           </svg>
         </button>
       </div>
-    </div>
+      <div className=" grid grid-cols-[348px_348px_348px] grid-rows-[32px_1fr] mt-4 gap-x-8 text-neutral1 font-[600] text-[18px] gap-y-4 max-h-[708px] ">
+        <div className="">
+          <h3>Working (03)</h3>
+        </div>
+        <div>
+          <h3>In progress (03)</h3>
+        </div>
+        <div>
+          <h3>Completed (03)</h3>
+        </div>
+        <div className=" grid grid-cols-[348px] auto-rows-[208px] gap-y-4  overflow-auto h-full">
+          <CardTaskComponent />
+          <CardTaskComponent />
+          <CardTaskComponent />
+        </div>
+        <div className=" grid grid-cols-[348px] auto-rows-[208px] gap-y-4 overflow-y-auto h-full">
+          <CardTaskComponent />
+          <CardTaskComponent />
+          <CardTaskComponent />
+          <CardTaskComponent />
+        </div>
+        <div className=" grid grid-cols-[348px] auto-rows-[208px] gap-y-4  overflow-auto h-full">
+          <CardTaskComponent />
+          <CardTaskComponent />
+          <CardTaskComponent />
+          <CardTaskComponent />
+          <CardTaskComponent />
+        </div>
+      </div>
+    </section>
   );
 }
