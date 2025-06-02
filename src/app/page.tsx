@@ -1,5 +1,5 @@
-import { DashBoardContainer } from '@/containers/dashboard-container/dashboard-container';
+import { ListViewContainer } from '@/containers/list-view-container/list-view-container';
 
 export default function Home() {
-  return <DashBoardContainer />;
+  return <ListViewContainer />;
 }

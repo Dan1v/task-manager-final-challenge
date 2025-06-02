@@ -12,7 +12,7 @@ interface MainLayoutsProps {
 export default function MainLayout({ children }: MainLayoutsProps) {
   return (
     <div className={styles.mainLayout}>
-      <div className="row-span-2 py-8 pl-8">
+      <div className="row-span-2">
         <SideBarContainer />
       </div>
       <div>
