@@ -50,23 +50,22 @@ export function ListViewContainer({ tasks }: CardViewContainerProps) {
         <AccordionRoot>
           <AccordionItem value="item-1">
             <AccordionTrigger>
-              To Do <span className=" text-neutral2">(05)</span>
+              To Do <span className=" text-neutral2">({todoTasks.length})</span>
             </AccordionTrigger>
             <AccordionContent>
               <div>
-                <table className=" border border-neutral3 bg-neutral4 w-full text-start">
+                <table className="border border-neutral3 bg-neutral4 w-full text-start table-fixed">
                   <tbody>
-                    {todoTasks.map((item) => {
-                      return (
-                        <ListItem
-                          key={item.position}
-                          dueDate="TODAY"
-                          estimate="5"
-                          taskAssignName="Amelia Nells"
-                          taskName="01 Create wireframe"
-                        />
-                      );
-                    })}
+                    {todoTasks.map((item) => (
+                      <ListItem
+                        key={item.position}
+                        dueDate={item.dueDate}
+                        estimate={item.pointEstimate}
+                        taskAssignName={item.assignee?.fullName}
+                        taskName={item.name}
+                        taskTags={item.tags}
+                      />
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -79,20 +78,21 @@ export function ListViewContainer({ tasks }: CardViewContainerProps) {
         <AccordionRoot>
           <AccordionItem value="item-1">
             <AccordionTrigger>
-              In Progress <span className=" text-neutral2">(05)</span>
+              In Progress <span className=" text-neutral2">({inProgressTasks.length})</span>
             </AccordionTrigger>
             <AccordionContent>
               <div>
-                <table className=" border border-neutral3 bg-neutral4 w-full text-start">
+                <table className=" border border-neutral3 bg-neutral4 w-full text-start table-fixed">
                   <tbody>
                     {inProgressTasks.map((item) => {
                       return (
                         <ListItem
                           key={item.position}
-                          dueDate="TODAY"
-                          estimate="5"
-                          taskAssignName="Amelia Nells"
-                          taskName="01 Create wireframe"
+                          dueDate={item.dueDate}
+                          estimate={item.pointEstimate}
+                          taskAssignName={item.assignee?.fullName}
+                          taskName={item.name}
+                          taskTags={item.tags}
                         />
                       );
                     })}
@@ -107,20 +107,21 @@ export function ListViewContainer({ tasks }: CardViewContainerProps) {
         <AccordionRoot>
           <AccordionItem value="item-1">
             <AccordionTrigger>
-              Reviews <span className=" text-neutral2">(05)</span>
+              Reviews <span className=" text-neutral2">({doneTasks.length})</span>
             </AccordionTrigger>
             <AccordionContent>
               <div>
-                <table className=" border border-neutral3 bg-neutral4 w-full text-start">
+                <table className=" border border-neutral3 bg-neutral4 w-full text-start table-fixed">
                   <tbody>
                     {doneTasks.map((item) => {
                       return (
                         <ListItem
                           key={item.position}
-                          dueDate="TODAY"
-                          estimate="5"
-                          taskAssignName="Amelia Nells"
-                          taskName="01 Create wireframe"
+                          dueDate={item.dueDate}
+                          estimate={item.pointEstimate}
+                          taskAssignName={item.assignee?.fullName}
+                          taskName={item.name}
+                          taskTags={item.tags}
                         />
                       );
                     })}

@@ -146,6 +146,7 @@ export enum UserType {
 
 export type GetTasksQueryVariables = Exact<{
   status?: InputMaybe<Status>;
+  assigneeId?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 export type GetTasksQuery = {

@@ -2,13 +2,23 @@ import React from 'react';
 
 import { GetOneTaskQuery } from '@/graphql/generated/graphql';
 
-import ChipSoftwareComponent from '../chip-software-component/chip-software-component';
+import { AvatarLetter } from '../../../components/avatar-letter-component/avatar-letter-component';
+import ChipSoftwareComponent from '../../../components/chip-software-component/chip-software-component';
+import { DueDateComponent } from './due-date-component/due-date-component';
 
 interface CardTaskComponentProps {
   task: GetOneTaskQuery;
 }
 
 export function CardTaskComponent({ task }: CardTaskComponentProps) {
+  const pointEstimateMap: Record<string, number> = {
+    EIGHT: 8,
+    FOUR: 4,
+    ONE: 1,
+    TWO: 2,
+    ZERO: 0,
+  };
+
   return (
     <div className=" bg-neutral4 rounded-[8px] flex flex-col w-full h-full p-4 gap-4">
       <div className="flex justify-between items-center w-full font-[600] text-neutral1 text-[18px] gap-2">
@@ -23,30 +33,23 @@ export function CardTaskComponent({ task }: CardTaskComponentProps) {
           <path d="M5 10C3.9 10 3 10.9 3 12C3 13.1 3.9 14 5 14C6.1 14 7 13.1 7 12C7 10.9 6.1 10 5 10ZM19 10C17.9 10 17 10.9 17 12C17 13.1 17.9 14 19 14C20.1 14 21 13.1 21 12C21 10.9 20.1 10 19 10ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"></path>
         </svg>
       </div>
-      <div className="flex justify-between items-center w-full font-[600] text-neutral1 text-[16px] text-">
-        <p>{task.pointEstimate} Points</p>
-        <div className=" px-4 py-1 bg-[#94979A1A] flex gap-2 rounded-[4px] ">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            fill="currentColor"
-          >
-            <path d="M12.0001 22.0001C7.02956 22.0001 3.00012 17.9707 3.00012 13.0001C3.00012 8.02956 7.02956 4.00012 12.0001 4.00012C16.9707 4.00012 21.0001 8.02956 21.0001 13.0001C21.0001 17.9707 16.9707 22.0001 12.0001 22.0001ZM12.0001 20.0001C15.8661 20.0001 19.0001 16.8661 19.0001 13.0001C19.0001 9.13412 15.8661 6.00012 12.0001 6.00012C8.13412 6.00012 5.00012 9.13412 5.00012 13.0001C5.00012 16.8661 8.13412 20.0001 12.0001 20.0001ZM13.0001 13.0001H16.0001V15.0001H11.0001V8.00012H13.0001V13.0001ZM1.74707 6.2826L5.2826 2.74707L6.69682 4.16128L3.16128 7.69682L1.74707 6.2826ZM18.7176 2.74707L22.2532 6.2826L20.839 7.69682L17.3034 4.16128L18.7176 2.74707Z"></path>
-          </svg>
-          <p>{task.dueDate}</p>
-        </div>
+      <div className="flex justify-between items-center w-full font-[600] text-neutral1 text-[16px]">
+        <p>{pointEstimateMap[task.pointEstimate]} Points</p>
+        <DueDateComponent dueDate={task.dueDate} />
       </div>
       <div className="flex flex-wrap gap-2">
-        {task.tags.map((item, index) => {
-          return <ChipSoftwareComponent key={index} taskTag={item} />;
-        })}
+        {task.tags.slice(0, 2).map((item, index) => (
+          <ChipSoftwareComponent key={index} taskTag={item} />
+        ))}
+
+        {task.tags.length > 2 && (
+          <div className="px-2 py-1 text-sm rounded bg-neutral3 text-white">
+            +{task.tags.length - 2}
+          </div>
+        )}
       </div>
       <div className=" flex justify-between items-center">
-        {/* TODO CHANGE TO IMG  */}
-
-        <div className=" w-8 h-8 border border-neutral1"></div>
+        <AvatarLetter name={task.assignee?.fullName} className=" w-8 h-8" />
         <div className=" flex  items-center gap-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"

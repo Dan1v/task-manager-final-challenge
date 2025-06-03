@@ -1,14 +1,18 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 
+import { ModalComponent } from '@/components/modal-component/modal-component';
 import { useDisplayModeStore } from '@/stores/use-display-mode-store';
 
+import { CreateTaskForm } from './create-task-form/create-task-form';
 import * as styles from './styles';
 
 type DisplayMode = 'list' | 'cards';
 
 export function SearchBarContainer() {
   const { displayMode, setDisplayMode } = useDisplayModeStore();
+
+  const [open, setOpen] = useState(false);
 
   const handleDisplayMode = (state: DisplayMode) => {
     setDisplayMode(state);
@@ -75,7 +79,7 @@ export function SearchBarContainer() {
             </svg>
           </button>
         </div>
-        <button className={styles.buttonNewTask}>
+        <button className={styles.buttonNewTask} onClick={() => setOpen(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -86,6 +90,18 @@ export function SearchBarContainer() {
             <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z" />
           </svg>
         </button>
+        <ModalComponent open={open} onOpenChange={setOpen}>
+          <CreateTaskForm
+            assignees={[
+              { id: '1', name: 'John Doe' },
+              { id: '2', name: 'Jane Smith' },
+            ]}
+            labels={['Frontend', 'Backend', 'UI', 'API']}
+            onSubmit={(data) => {
+              console.log(data);
+            }}
+          />
+        </ModalComponent>
       </div>
     </section>
   );
