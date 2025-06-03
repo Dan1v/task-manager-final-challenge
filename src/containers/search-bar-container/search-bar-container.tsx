@@ -1,12 +1,14 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useDisplayModeStore } from '@/stores/use-display-mode-store';
 
 import * as styles from './styles';
 
 type DisplayMode = 'list' | 'cards';
 
 export function SearchBarContainer() {
-  const [displayMode, setDisplayMode] = useState<DisplayMode>('list');
+  const { displayMode, setDisplayMode } = useDisplayModeStore();
 
   const handleDisplayMode = (state: DisplayMode) => {
     setDisplayMode(state);
